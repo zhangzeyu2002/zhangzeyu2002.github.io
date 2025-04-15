@@ -1,7 +1,7 @@
 {
-  "name": "Zhang zeyu",
+  "name": "academic-pages",
   "version": "0.8.1.1",
-  "description": "born in 2002.9.10",
+  "description": "Academic Pages Mistakes Jekyll theme npm build scripts",
   "repository": {
     "type": "git",
     "url": "https://github.com/academicpages/academicpages.github.io"
