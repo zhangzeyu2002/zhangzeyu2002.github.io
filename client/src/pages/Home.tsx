@@ -1,325 +1,185 @@
-import { Button } from "@/components/ui/button";
-import { Mail, Github, Linkedin, ExternalLink, Code2, BookOpen, Zap } from "lucide-react";
+import { Mail, Github, ExternalLink } from "lucide-react";
 import { useState } from "react";
 
-/**
- * Minimalist Techno Design System
- * Dark theme with neon blue accents (#00D9FF)
- * IBM Plex Mono for headings, Inter for body
- * Focus on content hierarchy and tech aesthetic
- */
-
-interface Project {
+interface Publication {
   title: string;
-  description: string;
-  tags: string[];
+  authors: string[];
+  venue: string;
+  year: number;
   link?: string;
 }
 
-interface Experience {
-  title: string;
-  organization: string;
-  period: string;
-  description: string;
+interface NewsItem {
+  date: string;
+  content: string;
 }
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<"about" | "research" | "projects">("about");
+  const [activeTab, setActiveTab] = useState<"about" | "publications">("about");
 
-  const projects: Project[] = [
+  const publications: Publication[] = [
     {
-      title: "Neural Network Optimization",
-      description: "Developed efficient training algorithms for large-scale neural networks, achieving 40% reduction in training time.",
-      tags: ["PyTorch", "CUDA", "Optimization"],
+      title: "Efficient Fine-tuning of Large Language Models",
+      authors: ["Ze-Yu Zhang", "Qi Fan", "Collaborator 1"],
+      venue: "IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+      year: 2026,
       link: "#"
     },
     {
-      title: "Computer Vision Pipeline",
-      description: "Built end-to-end vision system for object detection and segmentation using transformer architectures.",
-      tags: ["Vision Transformers", "OpenCV", "TensorFlow"],
-      link: "#"
-    },
-    {
-      title: "NLP Model Fine-tuning",
-      description: "Fine-tuned large language models for domain-specific tasks with improved performance metrics.",
-      tags: ["Transformers", "NLP", "BERT"],
+      title: "Novel Approaches to Neural Network Training",
+      authors: ["Ze-Yu Zhang", "Collaborator 2"],
+      venue: "International Conference on Learning Representations (ICLR)",
+      year: 2023,
       link: "#"
     }
   ];
 
-  const experiences: Experience[] = [
+  const news: NewsItem[] = [
     {
-      title: "AI Research Intern",
-      organization: "Tech Research Lab",
-      period: "2023 - Present",
-      description: "Conducting research on efficient deep learning models and contributing to peer-reviewed publications."
+      date: "Mar 15, 2025",
+      content: "Paper accepted to CVPR 2026 as co-first author"
     },
     {
-      title: "Machine Learning Engineer",
-      organization: "AI Startup",
-      period: "2022 - 2023",
-      description: "Developed and deployed ML models for production systems, optimizing inference performance."
+      date: "Sep 01, 2025",
+      content: "Started Master's program in Artificial Intelligence at Nanjing University"
+    },
+    {
+      date: "Jun 15, 2025",
+      content: "Graduated with Bachelor's degree in Data Science and Big Data Technology from UESTC"
     }
   ];
 
-  const skills = [
-    "Deep Learning", "PyTorch", "TensorFlow", "Computer Vision",
-    "NLP", "Python", "CUDA", "Data Analysis", "Research"
+  const researchInterests = [
+    "Machine Learning",
+    "Computer Vision",
+    "Efficient Fine-tuning of Large Models"
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
-        <div className="container flex items-center justify-between h-16">
-          <div className="font-mono text-lg font-bold glow-text">
-            &lt;AI_Researcher /&gt;
-          </div>
-          <div className="flex gap-8 items-center">
-            <a href="#about" className="text-sm hover:text-primary transition-colors">About</a>
-            <a href="#research" className="text-sm hover:text-primary transition-colors">Research</a>
-            <a href="#projects" className="text-sm hover:text-primary transition-colors">Projects</a>
-            <a href="#contact" className="text-sm hover:text-primary transition-colors">Contact</a>
+    <div className="min-h-screen bg-white text-gray-900">
+      <nav className="border-b border-gray-200 sticky top-0 bg-white/95 backdrop-blur-sm z-50">
+        <div className="container flex items-center justify-between h-14">
+          <div className="font-semibold text-lg">Zhang Ze-Yu</div>
+          <div className="flex gap-6 items-center text-sm">
+            <button
+              onClick={() => setActiveTab("about")}
+              className={activeTab === "about" ? "text-gray-900 font-medium" : "text-gray-600 hover:text-gray-900"}
+            >
+              about
+            </button>
+            <button
+              onClick={() => setActiveTab("publications")}
+              className={activeTab === "publications" ? "text-gray-900 font-medium" : "text-gray-600 hover:text-gray-900"}
+            >
+              publications
+            </button>
           </div>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 relative overflow-hidden">
-        <div 
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage: "url('https://d2xsxph8kpxj0f.cloudfront.net/310519663276187372/A35tzBEcGYzj6ngyYZW9UU/hero-background-WDyuygKrtupyLEJGrgWmRy.webp')",
-            backgroundSize: "cover",
-            backgroundPosition: "center"
-          }}
-        />
-        <div className="container relative z-10">
-          <div className="max-w-3xl animate-slide-in-up">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 glow-text">
-              AI Researcher & Engineer
-            </h1>
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-              Passionate about advancing artificial intelligence through research and development. 
-              Specializing in deep learning, computer vision, and efficient model optimization.
-            </p>
-            <div className="flex gap-4">
-              <Button 
-                className="bg-primary text-primary-foreground hover:bg-primary/90"
-                size="lg"
-              >
-                View My Work
-              </Button>
-              <Button 
-                variant="outline"
-                size="lg"
-                className="border-primary text-primary hover:bg-primary/10"
-              >
-                Download CV
-              </Button>
-            </div>
-          </div>
-        </div>
-        <div className="section-divider" />
-      </section>
-
-      {/* Main Content */}
-      <section className="py-20">
-        <div className="container">
-          {/* Tab Navigation */}
-          <div className="flex gap-4 mb-12 border-b border-border pb-4">
-            {["about", "research", "projects"].map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab as typeof activeTab)}
-                className={`px-4 py-2 font-mono text-sm transition-all ${
-                  activeTab === tab
-                    ? "text-primary border-b-2 border-primary"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {tab.toUpperCase()}
-              </button>
-            ))}
-          </div>
-
-          {/* About Tab */}
-          {activeTab === "about" && (
-            <div className="grid md:grid-cols-3 gap-8 animate-slide-in-up">
-              <div className="md:col-span-2">
-                <h2 className="text-2xl font-bold mb-6">About Me</h2>
-                <div className="space-y-4 text-muted-foreground leading-relaxed">
-                  <p>
-                    I'm a Master's student in Artificial Intelligence with a passion for pushing the boundaries 
-                    of what's possible with machine learning. My research focuses on efficient deep learning models 
-                    and their real-world applications.
-                  </p>
-                  <p>
-                    With hands-on experience in both research and industry, I combine theoretical knowledge with 
-                    practical implementation skills. I'm particularly interested in optimizing neural networks for 
-                    resource-constrained environments and developing interpretable AI systems.
-                  </p>
-                </div>
-
-                {/* Experience */}
-                <h3 className="text-xl font-bold mt-12 mb-6">Experience</h3>
-                <div className="space-y-6">
-                  {experiences.map((exp, idx) => (
-                    <div key={idx} className="tech-card">
-                      <div className="flex justify-between items-start mb-2">
-                        <h4 className="font-mono font-bold text-primary">{exp.title}</h4>
-                        <span className="text-xs text-muted-foreground">{exp.period}</span>
-                      </div>
-                      <p className="text-sm text-muted-foreground mb-2">{exp.organization}</p>
-                      <p className="text-sm">{exp.description}</p>
-                    </div>
-                  ))}
-                </div>
+      <main className="container py-12">
+        {activeTab === "about" && (
+          <div className="max-w-3xl">
+            <div className="mb-8 flex gap-8 items-start">
+              <div className="flex-1">
+                <h1 className="text-3xl font-bold mb-2">Zhang Ze-Yu (张泽宇)</h1>
+                <p className="text-gray-600 mb-4">School of Intelligence Science and Technology, Nanjing University</p>
+                <p className="text-sm text-gray-600">zhangzeyu0910@163.com</p>
               </div>
-
-              {/* Skills Sidebar */}
-              <div>
-                <h3 className="text-lg font-bold mb-6">Skills</h3>
-                <div className="glow-box p-6 rounded-lg">
-                  <div className="flex flex-wrap gap-2">
-                    {skills.map((skill, idx) => (
-                      <span
-                        key={idx}
-                        className="px-3 py-1 text-xs bg-primary/10 border border-primary/30 rounded text-primary hover:bg-primary/20 transition-colors cursor-default"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Stats */}
-                <div className="mt-8 space-y-4">
-                  <div className="code-block">
-                    <div className="text-primary/70">Publications</div>
-                    <div className="text-2xl font-bold text-primary">5+</div>
-                  </div>
-                  <div className="code-block">
-                    <div className="text-primary/70">Projects</div>
-                    <div className="text-2xl font-bold text-primary">15+</div>
-                  </div>
-                  <div className="code-block">
-                    <div className="text-primary/70">Experience</div>
-                    <div className="text-2xl font-bold text-primary">3+ yrs</div>
-                  </div>
-                </div>
+              <div className="flex-shrink-0">
+                <img 
+                  src="/avatar.png" 
+                  alt="Zhang Ze-Yu" 
+                  className="w-32 h-32 rounded-lg object-cover"
+                />
               </div>
             </div>
-          )}
 
-          {/* Research Tab */}
-          {activeTab === "research" && (
-            <div className="animate-slide-in-up">
-              <h2 className="text-2xl font-bold mb-8">Research Interests</h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                {[
-                  {
-                    icon: Zap,
-                    title: "Model Efficiency",
-                    description: "Developing techniques for training and deploying efficient neural networks with reduced computational requirements."
-                  },
-                  {
-                    icon: Code2,
-                    title: "Computer Vision",
-                    description: "Advancing visual understanding through novel architectures and training methodologies for object detection and segmentation."
-                  },
-                  {
-                    icon: BookOpen,
-                    title: "Natural Language Processing",
-                    description: "Exploring transformer-based models and their applications in understanding and generating human language."
-                  },
-                  {
-                    icon: Zap,
-                    title: "Interpretability",
-                    description: "Making AI systems more transparent and understandable through explainable AI techniques and visualization methods."
-                  }
-                ].map((item, idx) => {
-                  const Icon = item.icon;
-                  return (
-                    <div key={idx} className="tech-card group">
-                      <Icon className="w-8 h-8 text-primary mb-4 group-hover:animate-glow-pulse" />
-                      <h3 className="font-bold mb-2">{item.title}</h3>
-                      <p className="text-sm text-muted-foreground">{item.description}</p>
-                    </div>
-                  );
-                })}
-              </div>
+            <div className="mb-8 leading-relaxed">
+              <p className="mb-4">
+                I am a Master's student in Artificial Intelligence at the School of Intelligence Science and Technology, 
+                Nanjing University, advised by Prof. Qi Fan. I received my Bachelor's degree in Data Science and Big Data Technology 
+                from the University of Electronic Science and Technology of China in 2025.
+              </p>
+              <p className="mb-4">
+                My research interests include machine learning, computer vision, and efficient fine-tuning of large models. 
+                I am currently focused on developing scalable approaches for adapting large-scale neural networks to downstream tasks.
+              </p>
+            </div>
 
-              {/* Research Image */}
-              <div className="mt-12">
-                <div className="relative rounded-lg overflow-hidden glow-box">
-                  <img 
-                    src="https://d2xsxph8kpxj0f.cloudfront.net/310519663276187372/A35tzBEcGYzj6ngyYZW9UU/ai-research-visual-g37pdnwWRf55KMpcgVq2UZ.webp"
-                    alt="AI Research Visualization"
-                    className="w-full h-auto"
-                  />
-                </div>
+            <div className="mb-8">
+              <h2 className="text-lg font-semibold mb-3">Research Interests</h2>
+              <div className="flex flex-wrap gap-2">
+                {researchInterests.map((interest, idx) => (
+                  <span
+                    key={idx}
+                    className="px-3 py-1 text-sm bg-gray-100 border border-gray-300 rounded text-gray-700"
+                  >
+                    {interest}
+                  </span>
+                ))}
               </div>
             </div>
-          )}
 
-          {/* Projects Tab */}
-          {activeTab === "projects" && (
-            <div className="animate-slide-in-up">
-              <h2 className="text-2xl font-bold mb-8">Featured Projects</h2>
-              <div className="grid gap-6">
-                {projects.map((project, idx) => (
-                  <div key={idx} className="tech-card group">
-                    <div className="flex justify-between items-start mb-4">
-                      <h3 className="text-lg font-bold">{project.title}</h3>
-                      {project.link && (
-                        <ExternalLink className="w-5 h-5 text-primary opacity-0 group-hover:opacity-100 transition-opacity" />
-                      )}
-                    </div>
-                    <p className="text-muted-foreground mb-4">{project.description}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag, tagIdx) => (
-                        <span
-                          key={tagIdx}
-                          className="px-2 py-1 text-xs bg-primary/10 border border-primary/30 rounded text-primary"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+            <div className="mb-12">
+              <h2>news</h2>
+              <div className="space-y-3 mt-4">
+                {news.map((item, idx) => (
+                  <div key={idx} className="flex gap-6 text-sm">
+                    <span className="text-gray-600 whitespace-nowrap">{item.date}</span>
+                    <span>{item.content}</span>
                   </div>
                 ))}
               </div>
             </div>
-          )}
-        </div>
-      </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-20 border-t border-border">
-        <div className="container max-w-2xl">
-          <h2 className="text-3xl font-bold mb-8 text-center">Get In Touch</h2>
-          <p className="text-center text-muted-foreground mb-12">
-            I'm always interested in discussing research, collaboration opportunities, or just connecting with fellow AI enthusiasts.
-          </p>
-          
-          <div className="flex justify-center gap-6 mb-12">
-            <a href="mailto:your.email@example.com" className="tech-card p-4 hover:scale-105 transition-transform">
-              <Mail className="w-6 h-6 text-primary" />
-            </a>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="tech-card p-4 hover:scale-105 transition-transform">
-              <Github className="w-6 h-6 text-primary" />
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="tech-card p-4 hover:scale-105 transition-transform">
-              <Linkedin className="w-6 h-6 text-primary" />
-            </a>
+            <div className="flex gap-4 text-sm flex-wrap">
+              <a href="mailto:zhangzeyu0910@163.com" className="flex items-center gap-2 hover:text-blue-600">
+                <Mail className="w-4 h-4" />
+                Email
+              </a>
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-blue-600">
+                <Github className="w-4 h-4" />
+                GitHub
+              </a>
+            </div>
           </div>
+        )}
 
-          <div className="text-center text-sm text-muted-foreground">
-            <p>© 2024 AI Researcher. Built with React + Tailwind CSS.</p>
+        {activeTab === "publications" && (
+          <div className="max-w-3xl">
+            <h2>selected publications</h2>
+            <div className="space-y-8 mt-6">
+              {publications.map((pub, idx) => (
+                <div key={idx} className="border-b border-gray-200 pb-6 last:border-b-0">
+                  <div className="mb-2">
+                    {pub.link ? (
+                      <a href={pub.link} className="text-base font-medium hover:text-blue-600 flex items-center gap-2">
+                        {pub.title}
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    ) : (
+                      <h3 className="text-base font-medium">{pub.title}</h3>
+                    )}
+                  </div>
+                  <p className="text-sm text-gray-600 mb-1">
+                    {pub.authors.join(", ")}
+                  </p>
+                  <p className="text-sm text-gray-600 italic">
+                    {pub.venue}, {pub.year}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
+        )}
+      </main>
+
+      <footer className="border-t border-gray-200 mt-16 py-8">
+        <div className="container text-center text-xs text-gray-600">
+          <p>© 2025 Zhang Ze-Yu. Last updated: March 2025.</p>
         </div>
-      </section>
+      </footer>
     </div>
   );
 }
