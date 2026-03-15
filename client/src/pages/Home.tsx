@@ -86,7 +86,6 @@ const defaultProfile: ProfileData = {
 };
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<"about" | "publications">("about");
   const [profile, setProfile] = useState<ProfileData>(defaultProfile);
 
   useEffect(() => {
@@ -117,25 +116,24 @@ export default function Home() {
         <div className="container flex items-center justify-between h-14">
           <div className="font-semibold text-lg">{profile.basic.name}</div>
           <div className="flex gap-6 items-center text-sm">
-            <button
-              onClick={() => setActiveTab("about")}
-              className={activeTab === "about" ? "text-gray-900 font-medium" : "text-gray-600 hover:text-gray-900"}
+            <a
+              href="#about-section"
+              className="text-gray-900 font-medium hover:text-gray-700"
             >
               about
-            </button>
-            <button
-              onClick={() => setActiveTab("publications")}
-              className={activeTab === "publications" ? "text-gray-900 font-medium" : "text-gray-600 hover:text-gray-900"}
+            </a>
+            <a
+              href="#publications-section"
+              className="text-gray-600 hover:text-gray-900"
             >
               publications
-            </button>
+            </a>
           </div>
         </div>
       </nav>
 
       <main className="container py-12">
-        {activeTab === "about" && (
-          <div className="max-w-3xl">
+        <div id="about-section" className="max-w-3xl scroll-mt-20">
             <div className="mb-8 flex gap-8 items-start">
               <div className="flex-1">
                 <h1 className="text-3xl font-bold mb-2">{profile.basic.name} ({profile.basic.nameZh})</h1>
@@ -198,11 +196,8 @@ export default function Home() {
                 ))}
               </div>
             </div>
-          </div>
-        )}
 
-        {activeTab === "publications" && (
-          <div className="max-w-3xl">
+            <div id="publications-section" className="mb-12 scroll-mt-20">
             <h2>selected publications</h2>
             <div className="space-y-8 mt-6">
               {profile.publications.map((pub, idx) => (
@@ -227,7 +222,7 @@ export default function Home() {
               ))}
             </div>
           </div>
-        )}
+        </div>
       </main>
 
       <footer className="border-t border-gray-200 mt-16 py-8">
