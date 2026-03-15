@@ -35,18 +35,18 @@
   ],
   "publications": [
     {
-      "title": "XXXXXXXXXXXXXXXXXXXXX",
-      "authors": ["Zeyu Zhang", "Qi Fan", "Collaborator 1"],
+      "title": "SAME: Sparse and Anchored Model Editing for Heterogeneous Incremental Learning under Limited Data",
+      "authors": ["Zixuan Duan", "Zeyu Zhang", "Fengyuan Lu", "Shaofeng Zhang", "Qi Fan", "Yang Gao"],
       "venue": "IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
-      "year": 2029,
-      "link": "#"
-    },
-    {
-      "title": "XXXXXXXXXXXXXXXXXXXXX",
-      "authors": ["Zeyu Zhang", "Collaborator 2"],
-      "venue": "International Conference on Learning Representations (ICLR)",
-      "year": 2029,
+      "year": 2026,
       "link": "#"
     }
+    // {
+    //   "title": "XXXXXXXXXXXXXXXXXXXXX",
+    //   "authors": ["Zeyu Zhang", "Collaborator 2"],
+    //   "venue": "International Conference on Learning Representations (ICLR)",
+    //   "year": 2029,
+    //   "link": "#"
+    // }
   ]
 }
