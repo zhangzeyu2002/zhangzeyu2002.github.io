@@ -198,7 +198,7 @@ export default function Home() {
             </div>
 
             <div id="publications-section" className="mb-12 scroll-mt-20">
-            <h2>selected publications</h2>
+            <h2>publications</h2>
             <div className="space-y-8 mt-6">
               {profile.publications.map((pub, idx) => (
                 <div key={idx} className="border-b border-gray-200 pb-6 last:border-b-0">
