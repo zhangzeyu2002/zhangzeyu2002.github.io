@@ -36,15 +36,17 @@ git remote set-url origin git@github.com:<你的用户名>/<你的仓库名>.git
 
 这个站点是 React + Vite 项目，核心信息主要在：
 
-- `client/src/pages/Home.tsx`
+- `client/public/profile.json`
 - `client/public/avatar.png`
 
-在 `client/src/pages/Home.tsx` 中，常见修改点：
-- `publications`：论文列表
-- `news`：新闻动态
+现在推荐只改 `client/public/profile.json`，常见字段：
+- `basic`：姓名、学校、邮箱、GitHub、地址、头像路径、页脚日期
+- `about`：个人简介段落（字符串数组）
 - `researchInterests`：研究兴趣
-- 个人信息块：姓名、学校、邮箱、GitHub、地址
-- 个人简介段落：About 文本
+- `news`：新闻动态
+- `publications`：论文列表
+
+`client/src/pages/Home.tsx` 已改为自动读取该 JSON。你通常不再需要改代码。
 
 头像替换：
 - 直接替换 `client/public/avatar.png`
@@ -143,7 +145,7 @@ git branch --show-current
 ```bash
 cd /workspace/zhangzeyu2002.github.io
 pnpm dev
-# 修改 client/src/pages/Home.tsx 和/或 client/public/avatar.png
+# 修改 client/public/profile.json 和/或 client/public/avatar.png
 pnpm build
 git add -A
 git commit -m "update homepage"

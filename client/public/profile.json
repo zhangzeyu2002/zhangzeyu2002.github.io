@@ -1,0 +1,52 @@
+{
+  "basic": {
+    "name": "Zeyu Zhang",
+    "nameZh": "张泽宇",
+    "school": "School of Intelligence Science and Technology, Nanjing University",
+    "email": "zhangzeyu0910@163.com",
+    "github": "https://github.com/zhangzeyu2002",
+    "location": "Suzhou, China",
+    "avatar": "/avatar.png",
+    "footerYear": 2025,
+    "lastUpdated": "March 2025"
+  },
+  "about": [
+    "I am a Master's student in Artificial Intelligence at the School of Intelligence Science and Technology, Nanjing University, advised by Prof. Qi Fan. I received my Bachelor's degree in Data Science and Big Data Technology from the University of Electronic Science and Technology of China in 2025.",
+    "My research interests include machine learning, computer vision, and efficient fine-tuning of large models. I am currently focused on developing scalable approaches for adapting large-scale neural networks to downstream tasks."
+  ],
+  "researchInterests": [
+    "Machine Learning",
+    "Computer Vision",
+    "Efficient Fine-tuning of Large Models"
+  ],
+  "news": [
+    {
+      "date": "Mar 05, 2026",
+      "content": "Paper accepted to CVPR 2026 as co-first author"
+    },
+    {
+      "date": "Sep 01, 2025",
+      "content": "Started Master's program in Artificial Intelligence at Nanjing University"
+    },
+    {
+      "date": "Jun 15, 2025",
+      "content": "Graduated with Bachelor's degree in Data Science and Big Data Technology from UESTC"
+    }
+  ],
+  "publications": [
+    {
+      "title": "Efficient Fine-tuning of Large Language Models",
+      "authors": ["Zeyu Zhang", "Qi Fan", "Collaborator 1"],
+      "venue": "IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+      "year": 2026,
+      "link": "#"
+    },
+    {
+      "title": "Novel Approaches to Neural Network Training",
+      "authors": ["Zeyu Zhang", "Collaborator 2"],
+      "venue": "International Conference on Learning Representations (ICLR)",
+      "year": 2023,
+      "link": "#"
+    }
+  ]
+}
