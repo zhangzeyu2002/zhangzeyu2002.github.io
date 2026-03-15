@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zeyu Zhang | Personal Homepage</title>
+    <script>
+      // GitHub Pages SPA routing workaround
+      // Redirects 404s back to index.html with the path as a query parameter
+      const l = window.location;
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        '/?p=' + encodeURIComponent(l.pathname + l.search) +
+        l.hash
+      );
+    </script>
+  </head>
+  <body></body>
+</html>
