@@ -90,7 +90,7 @@ export default function Home() {
                     <Mail className="w-4 h-4" />
                     Email
                   </a>
-                  <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
+                  <a href="https://github.com/zhangzeyu2002" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
                     <Github className="w-4 h-4" />
                     GitHub
                   </a>
