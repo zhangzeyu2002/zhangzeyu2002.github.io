@@ -6,7 +6,7 @@
     "email": "zhangzeyu0910@163.com",
     "github": "https://github.com/zhangzeyu2002",
     "location": "Suzhou, China",
-    "avatar": "/avatar.png",
+    "avatar": "/avatar.jpg",
     "footerYear": 2025,
     "lastUpdated": "March 2025"
   },
@@ -36,10 +36,18 @@
   "publications": [
     {
       "title": "SAME: Sparse and Anchored Model Editing for Heterogeneous Incremental Learning under Limited Data",
-      "authors": ["Zixuan Duan", "Zeyu Zhang", "Fengyuan Lu", "Shaofeng Zhang", "Qi Fan", "Yang Gao"],
+      "authors": [
+        {"name": "Zixuan Duan", "isBold": false, "hasStar": true},
+        {"name": "Zeyu Zhang", "isBold": true, "hasStar": true},
+        {"name": "Fengyuan Lu", "isBold": false, "hasStar": false},
+        {"name": "Shaofeng Zhang", "isBold": false, "hasStar": false},
+        {"name": "Qi Fan", "isBold": false, "hasStar": false},
+        {"name": "Yang Gao", "isBold": false, "hasStar": false}
+      ],
       "venue": "IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
       "year": 2026,
-      "link": "#"
+      "link": "#",
+      "highlight": true
     }
 
   ]

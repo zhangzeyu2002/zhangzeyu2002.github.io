@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 
 interface Publication {
   title: string;
-  authors: string[];
+  authors: (string | { name: string; isBold?: boolean; hasStar?: boolean })[];
   venue: string;
   year: number;
   link?: string;
+  highlight?: boolean;
 }
 
 interface NewsItem {
@@ -40,7 +41,7 @@ const defaultProfile: ProfileData = {
     email: "zhangzeyu0910@163.com",
     github: "https://github.com/zhangzeyu2002",
     location: "Suzhou, China",
-    avatar: "/avatar.png",
+    avatar: "/avatar.jpg",
     footerYear: 2025,
     lastUpdated: "March 2025"
   },
@@ -110,6 +111,19 @@ export default function Home() {
     };
   }, []);
 
+  const renderTextWithLinks = (text: string) => {
+    const parts = text.split(/(Qi Fan)/g);
+    return parts.map((part, idx) => 
+      part === "Qi Fan" ? (
+        <a key={idx} href="https://fanq15.github.io/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700">
+          Qi Fan
+        </a>
+      ) : (
+        <span key={idx}>{part}</span>
+      )
+    );
+  };
+
   return (
     <div className="min-h-screen bg-white text-gray-900">
       <nav className="border-b border-gray-200 sticky top-0 bg-white/95 backdrop-blur-sm z-50">
@@ -166,7 +180,7 @@ export default function Home() {
             <div className="mb-8 leading-relaxed">
               {profile.about.map((paragraph, idx) => (
                 <p key={idx} className="mb-4">
-                  {paragraph}
+                  {renderTextWithLinks(paragraph)}
                 </p>
               ))}
             </div>
@@ -213,9 +227,30 @@ export default function Home() {
                     )}
                   </div>
                   <p className="text-sm text-gray-600 mb-1">
-                    {pub.authors.join(", ")}
+                    {pub.authors.map((authorData, authorIdx) => {
+                      const author = typeof authorData === "string" ? { name: authorData } : authorData;
+                      const authorName = author.name;
+                      const isQiFan = authorName === "Qi Fan";
+                      
+                      return (
+                        <span key={authorIdx}>
+                          {isQiFan ? (
+                            <a href="https://fanq15.github.io/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700">
+                              {author.isBold ? <strong>{authorName}</strong> : authorName}
+                            </a>
+                          ) : (
+                            <>
+                              {author.isBold ? <strong>{authorName}</strong> : <span>{authorName}</span>}
+                              {author.hasStar && <span>*</span>}
+                            </>
+                          )}
+                          {authorIdx < pub.authors.length - 1 && ", "}
+                        </span>
+                      );
+                    })}
                   </p>
                   <p className="text-sm text-gray-600 italic">
+                    {pub.highlight && <span className="font-semibold text-blue-600 mr-1">[Highlight]</span>}
                     {pub.venue}, {pub.year}
                   </p>
                 </div>
