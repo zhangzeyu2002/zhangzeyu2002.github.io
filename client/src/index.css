@@ -25,7 +25,7 @@
     overflow: hidden;
   }
 
-  .cursor-sheep {
+  .cursor-pony {
     position: fixed;
     top: 0;
     left: 0;
@@ -67,7 +67,7 @@
   }
 
   .cursor-flock,
-  .cursor-sheep,
+  .cursor-pony,
   .interactive-link,
   .nav-link,
   .profile-photo,

@@ -92,30 +92,30 @@ export default function Home() {
   useEffect(() => {
     if (!window.matchMedia("(pointer: fine)").matches || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const sheep = Array.from(document.querySelectorAll<HTMLElement>(".cursor-sheep"));
-    const positions = sheep.map(() => ({ x: window.innerWidth / 2, y: window.innerHeight / 2 }));
+    const ponies = Array.from(document.querySelectorAll<HTMLElement>(".cursor-pony"));
+    const positions = ponies.map(() => ({ x: window.innerWidth / 2, y: window.innerHeight / 2 }));
     let animationFrame = 0;
 
     const handlePointerMove = (event: PointerEvent) => {
       positions[0] = { x: event.clientX, y: event.clientY };
     };
 
-    const animateSheep = () => {
+    const animatePonies = () => {
       positions.forEach((position, index) => {
         if (index > 0) {
           const previous = positions[index - 1];
-          position.x += (previous.x - position.x) * 0.12;
-          position.y += (previous.y - position.y) * 0.12;
+          position.x += (previous.x - position.x) * 0.07;
+          position.y += (previous.y - position.y) * 0.07;
         }
 
-        const bob = Math.sin(Date.now() / 240 + index) * 3;
-        sheep[index].style.transform = `translate3d(${position.x - 18}px, ${position.y - 18 + bob}px, 0) rotate(${index % 2 === 0 ? -4 : 4}deg)`;
+        const bob = Math.sin(Date.now() / 360 + index) * 3;
+        ponies[index].style.transform = `translate3d(${position.x - 18}px, ${position.y - 18 + bob}px, 0) rotate(${index % 2 === 0 ? -4 : 4}deg)`;
       });
-      animationFrame = window.requestAnimationFrame(animateSheep);
+      animationFrame = window.requestAnimationFrame(animatePonies);
     };
 
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
-    animationFrame = window.requestAnimationFrame(animateSheep);
+    animationFrame = window.requestAnimationFrame(animatePonies);
     return () => {
       window.removeEventListener("pointermove", handlePointerMove);
       window.cancelAnimationFrame(animationFrame);
@@ -160,11 +160,11 @@ export default function Home() {
   return (
     <div className="site-shell min-h-screen bg-white text-gray-900">
       <div className="cursor-flock" aria-hidden="true">
-        {[0, 1, 2, 3, 4].map((sheep) => (
+        {[0, 1, 2, 3, 4].map((pony) => (
           <img
-            key={sheep}
-            className="cursor-sheep"
-            src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f411.svg"
+            key={pony}
+            className="cursor-pony"
+            src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f434.svg"
             alt=""
           />
         ))}
