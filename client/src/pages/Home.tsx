@@ -109,11 +109,7 @@ export default function Home() {
         }
 
         const bob = Math.sin(Date.now() / 360 + index) * 3;
-        const tilt = Math.sin(Date.now() / 360 + index) * 3;
-        const direction = index === 0
-          ? tilt
-          : Math.atan2(target.y - position.y, target.x - position.x) * (180 / Math.PI) + 180 + tilt;
-        ponies[index].style.transform = `translate3d(${position.x - 24}px, ${position.y - 24 + bob}px, 0) rotate(${direction}deg)`;
+        ponies[index].style.transform = `translate3d(${position.x - 24}px, ${position.y - 24 + bob}px, 0)`;
       });
       animationFrame = window.requestAnimationFrame(animatePonies);
     };
