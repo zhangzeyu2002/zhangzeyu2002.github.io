@@ -102,14 +102,18 @@ export default function Home() {
 
     const animatePonies = () => {
       positions.forEach((position, index) => {
+        const target = positions[index === 0 ? 0 : index - 1];
         if (index > 0) {
-          const previous = positions[index - 1];
-          position.x += (previous.x - position.x) * 0.07;
-          position.y += (previous.y - position.y) * 0.07;
+          position.x += (target.x - position.x) * 0.07;
+          position.y += (target.y - position.y) * 0.07;
         }
 
         const bob = Math.sin(Date.now() / 360 + index) * 3;
-        ponies[index].style.transform = `translate3d(${position.x - 24}px, ${position.y - 24 + bob}px, 0) rotate(${index % 2 === 0 ? -4 : 4}deg)`;
+        const tilt = Math.sin(Date.now() / 360 + index) * 3;
+        const direction = index === 0
+          ? tilt
+          : Math.atan2(target.y - position.y, target.x - position.x) * (180 / Math.PI) + 180 + tilt;
+        ponies[index].style.transform = `translate3d(${position.x - 24}px, ${position.y - 24 + bob}px, 0) rotate(${direction}deg)`;
       });
       animationFrame = window.requestAnimationFrame(animatePonies);
     };
