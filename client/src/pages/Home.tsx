@@ -90,15 +90,36 @@ export default function Home() {
   const [profile, setProfile] = useState<ProfileData>(defaultProfile);
 
   useEffect(() => {
-    if (!window.matchMedia("(pointer: fine)").matches) return;
+    if (!window.matchMedia("(pointer: fine)").matches || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const sheep = Array.from(document.querySelectorAll<HTMLElement>(".cursor-sheep"));
+    const positions = sheep.map(() => ({ x: window.innerWidth / 2, y: window.innerHeight / 2 }));
+    let animationFrame = 0;
 
     const handlePointerMove = (event: PointerEvent) => {
-      document.documentElement.style.setProperty("--cursor-x", `${event.clientX}px`);
-      document.documentElement.style.setProperty("--cursor-y", `${event.clientY}px`);
+      positions[0] = { x: event.clientX, y: event.clientY };
+    };
+
+    const animateSheep = () => {
+      positions.forEach((position, index) => {
+        if (index > 0) {
+          const previous = positions[index - 1];
+          position.x += (previous.x - position.x) * 0.12;
+          position.y += (previous.y - position.y) * 0.12;
+        }
+
+        const bob = Math.sin(Date.now() / 240 + index) * 3;
+        sheep[index].style.transform = `translate3d(${position.x - 18}px, ${position.y - 18 + bob}px, 0) rotate(${index % 2 === 0 ? -4 : 4}deg)`;
+      });
+      animationFrame = window.requestAnimationFrame(animateSheep);
     };
 
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
-    return () => window.removeEventListener("pointermove", handlePointerMove);
+    animationFrame = window.requestAnimationFrame(animateSheep);
+    return () => {
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.cancelAnimationFrame(animationFrame);
+    };
   }, []);
 
   useEffect(() => {
@@ -138,6 +159,16 @@ export default function Home() {
 
   return (
     <div className="site-shell min-h-screen bg-white text-gray-900">
+      <div className="cursor-flock" aria-hidden="true">
+        {[0, 1, 2, 3, 4].map((sheep) => (
+          <img
+            key={sheep}
+            className="cursor-sheep"
+            src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f411.svg"
+            alt=""
+          />
+        ))}
+      </div>
       <nav className="border-b border-gray-200 sticky top-0 bg-white/95 backdrop-blur-sm z-50">
         <div className="container flex items-center justify-between h-14">
           <div className="font-semibold text-lg">{profile.basic.name}</div>

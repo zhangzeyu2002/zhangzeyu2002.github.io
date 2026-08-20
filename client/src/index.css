@@ -1,11 +1,6 @@
 @import "tailwindcss";
 
 @layer base {
-  :root {
-    --cursor-x: 50vw;
-    --cursor-y: 25vh;
-  }
-
   html {
     scroll-behavior: smooth;
   }
@@ -22,17 +17,23 @@
     overflow: hidden;
   }
 
-  .site-shell::before {
+  .cursor-flock {
     position: fixed;
-    z-index: -1;
+    z-index: 60;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .cursor-sheep {
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    content: "";
-    background: radial-gradient(420px circle at var(--cursor-x) var(--cursor-y), rgba(37, 99, 235, 0.08), transparent 68%);
-    transition: background 180ms ease-out;
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    filter: drop-shadow(0 5px 5px rgba(30, 41, 59, 0.16));
+    will-change: transform;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -65,13 +66,18 @@
     scroll-behavior: auto;
   }
 
-  .site-shell::before,
+  .cursor-flock,
+  .cursor-sheep,
   .interactive-link,
   .nav-link,
   .profile-photo,
   .interest-chip,
   .publication-row {
     transition: none;
+  }
+
+  .cursor-flock {
+    display: none;
   }
 }
 
