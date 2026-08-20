@@ -90,6 +90,18 @@ export default function Home() {
   const [profile, setProfile] = useState<ProfileData>(defaultProfile);
 
   useEffect(() => {
+    if (!window.matchMedia("(pointer: fine)").matches) return;
+
+    const handlePointerMove = (event: PointerEvent) => {
+      document.documentElement.style.setProperty("--cursor-x", `${event.clientX}px`);
+      document.documentElement.style.setProperty("--cursor-y", `${event.clientY}px`);
+    };
+
+    window.addEventListener("pointermove", handlePointerMove, { passive: true });
+    return () => window.removeEventListener("pointermove", handlePointerMove);
+  }, []);
+
+  useEffect(() => {
     let ignore = false;
 
     async function loadProfile() {
@@ -125,20 +137,20 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-gray-900">
+    <div className="site-shell min-h-screen bg-white text-gray-900">
       <nav className="border-b border-gray-200 sticky top-0 bg-white/95 backdrop-blur-sm z-50">
         <div className="container flex items-center justify-between h-14">
           <div className="font-semibold text-lg">{profile.basic.name}</div>
           <div className="flex gap-6 items-center text-sm">
             <a
               href="#about-section"
-              className="text-gray-900 font-medium hover:text-gray-700"
+              className="nav-link text-gray-900 font-medium hover:text-gray-700"
             >
               about
             </a>
             <a
               href="#publications-section"
-              className="text-gray-600 hover:text-gray-900"
+              className="nav-link text-gray-600 hover:text-gray-900"
             >
               publications
             </a>
@@ -154,11 +166,11 @@ export default function Home() {
                 <p className="text-gray-600 mb-4">{profile.basic.school}</p>
                 <p className="text-sm text-gray-600 mb-3">{profile.basic.email}</p>
                 <div className="flex gap-4 text-sm flex-wrap">
-                  <a href={`mailto:${profile.basic.email}`} className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
+                  <a href={`mailto:${profile.basic.email}`} className="interactive-link flex items-center gap-2 text-blue-600 hover:text-blue-700">
                     <Mail className="w-4 h-4" />
                     Email
                   </a>
-                  <a href={profile.basic.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
+                  <a href={profile.basic.github} target="_blank" rel="noopener noreferrer" className="interactive-link flex items-center gap-2 text-blue-600 hover:text-blue-700">
                     <Github className="w-4 h-4" />
                     GitHub
                   </a>
@@ -168,7 +180,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="flex-shrink-0">
+              <div className="profile-photo flex-shrink-0">
                 <img 
                   src={profile.basic.avatar}
                   alt={profile.basic.name}
@@ -191,7 +203,7 @@ export default function Home() {
                 {profile.researchInterests.map((interest, idx) => (
                   <span
                     key={idx}
-                    className="px-3 py-1 text-sm bg-gray-100 border border-gray-300 rounded text-gray-700"
+                    className="interest-chip px-3 py-1 text-sm bg-gray-100 border border-gray-300 rounded text-gray-700"
                   >
                     {interest}
                   </span>
@@ -215,10 +227,10 @@ export default function Home() {
             <h2>publications</h2>
             <div className="space-y-8 mt-6">
               {profile.publications.map((pub, idx) => (
-                <div key={idx} className="border-b border-gray-200 pb-6 last:border-b-0">
+                <div key={idx} className="publication-row border-b border-gray-200 pb-6 last:border-b-0">
                   <div className="mb-2">
                     {pub.link ? (
-                      <a href={pub.link} className="text-base font-medium hover:text-blue-600 flex items-center gap-2">
+                      <a href={pub.link} target="_blank" rel="noopener noreferrer" className="interactive-link text-base font-medium hover:text-blue-600 flex items-center gap-2">
                         {pub.title}
                         <ExternalLink className="w-4 h-4" />
                       </a>
