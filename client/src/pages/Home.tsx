@@ -109,7 +109,7 @@ export default function Home() {
         }
 
         const bob = Math.sin(Date.now() / 360 + index) * 3;
-        ponies[index].style.transform = `translate3d(${position.x - 18}px, ${position.y - 18 + bob}px, 0) rotate(${index % 2 === 0 ? -4 : 4}deg)`;
+        ponies[index].style.transform = `translate3d(${position.x - 24}px, ${position.y - 24 + bob}px, 0) rotate(${index % 2 === 0 ? -4 : 4}deg)`;
       });
       animationFrame = window.requestAnimationFrame(animatePonies);
     };
@@ -164,7 +164,7 @@ export default function Home() {
           <img
             key={pony}
             className="cursor-pony"
-            src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f434.svg"
+            src={`https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/${pony === 0 ? "1f955" : "1f40e"}.svg`}
             alt=""
           />
         ))}
