@@ -88,7 +88,7 @@ function vitePluginManusDebugCollector(): Plugin {
           {
             tag: "script",
             attrs: {
-              src: "/__manus__/debug-collector.js",
+              src: "/public/__manus__/debug-collector.js",
               defer: true,
             },
             injectTo: "head",
@@ -150,7 +150,13 @@ function vitePluginManusDebugCollector(): Plugin {
   };
 }
 
-const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector()];
+const plugins = [
+  react(),
+  tailwindcss(),
+  jsxLocPlugin(),
+  { ...vitePluginManusRuntime(), apply: "serve" as const },
+  vitePluginManusDebugCollector(),
+];
 
 export default defineConfig({
   base: process.env.NODE_ENV === 'production' ? '/' : '/',
@@ -164,7 +170,10 @@ export default defineConfig({
   },
   envDir: path.resolve(import.meta.dirname),
   root: path.resolve(import.meta.dirname, "client"),
+  // Publish only the greeting's assets while the full profile is hidden.
+  publicDir: path.resolve(import.meta.dirname, "client", "greeting-public"),
   build: {
+    modulePreload: { polyfill: false },
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
   },
